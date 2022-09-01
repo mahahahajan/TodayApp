@@ -3,4 +3,4 @@ Creating a Flutter app to act as my morning hub (weather, outfit, water, and tod
 
 
 ## iOS Mockup
-<img src="uiDemo.png">
+<img src="uiDemo.png" width='50%'>
