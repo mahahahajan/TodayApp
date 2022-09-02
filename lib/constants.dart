@@ -13,12 +13,17 @@ const Color headerTextColor = Color.fromARGB(255, 213, 213, 222);
 const Color weatherCardBackgroundColor = Color(0xFF333333);
 
 const TextStyle degreesNumberTextStyle =
-    TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold);
+    TextStyle(color: Colors.white, fontSize: 55, fontWeight: FontWeight.bold);
 const TextStyle degreesUnitTextStyle = TextStyle(
     color: Colors.white,
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: FontWeight.w400,
-    letterSpacing: -3);
+    letterSpacing: -6);
+const TextStyle weatherDescriptionStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 14,
+  fontWeight: FontWeight.w200,
+);
 const TextStyle outfitLabelTextStyle = TextStyle(
     color: Colors.grey,
     fontSize: 14,
