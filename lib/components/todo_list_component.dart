@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:today_app/components/task_component.dart';
-import 'package:today_app/components/today_card_component.dart';
+import 'package:today_app/components/custom_today_card_widget.dart';
 import 'package:today_app/constants.dart';
 
-class TodoComponent extends StatelessWidget {
-  const TodoComponent({
+class TodoListComponent extends StatelessWidget {
+  const TodoListComponent({
     Key? key,
   }) : super(key: key);
 

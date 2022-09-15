@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import 'package:today_app/components/today_card_component.dart';
+import 'package:today_app/components/custom_today_card_widget.dart';
 import 'package:today_app/constants.dart';
 
 class ReminderComponent extends StatelessWidget {
@@ -10,7 +10,7 @@ class ReminderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TodayCard(
+    return CustomTodayCard(
       cardColor: Colors.blue,
       elevation: 1,
       margin: EdgeInsets.fromLTRB(10, 0, 10, 0),

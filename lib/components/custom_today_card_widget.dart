@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:today_app/constants.dart';
 
-class TodayCard extends StatelessWidget {
-  
-  TodayCard({required this.cardColor, required this.elevation, required this.margin, required this.borderRadius, required this.child});
-      
+class CustomTodayCard extends StatelessWidget {
+  CustomTodayCard(
+      {required this.cardColor,
+      required this.elevation,
+      required this.margin,
+      required this.borderRadius,
+      required this.child});
+
   // {
   //   this.elevation = elevation;
   //   this.customMargin = margin;
@@ -19,7 +23,6 @@ class TodayCard extends StatelessWidget {
   final EdgeInsets margin;
   final double borderRadius;
   final Widget child;
-
 
   @override
   Widget build(BuildContext context) {
