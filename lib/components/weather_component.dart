@@ -24,6 +24,7 @@ class WeatherComponent extends StatefulWidget {
 }
 
 class _WeatherComponentState extends State<WeatherComponent> {
+  //TODO: Clean up all this code -- I dont know which variables are still needed
   double? lat;
 
   double? long;
@@ -93,6 +94,7 @@ class _WeatherComponentState extends State<WeatherComponent> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO:see if you can make this structure a little clearers
     return CustomTodayCard(
       cardColor: weatherCardBackgroundColor,
       elevation: 10,
@@ -164,7 +166,6 @@ class _WeatherComponentState extends State<WeatherComponent> {
                       ),
                     ]),
                   ),
-                  //TODO: Check if there's a way to combine these later -- dont need 2 containers
                   Column(
                     children: [
                       Text(
@@ -175,7 +176,6 @@ class _WeatherComponentState extends State<WeatherComponent> {
                         myWeather.outfitTitle,
                         style: outfitItemsTextStyle,
                       ),
-                      //TODO: Make this dynamic, duh
                       RichText(
                         text: TextSpan(
                           children: [

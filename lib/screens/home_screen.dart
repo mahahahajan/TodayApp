@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:today_app/components/header_component.dart';
 import 'package:today_app/components/weather_component.dart';
 import 'package:today_app/components/reminder_component.dart';
@@ -25,6 +26,12 @@ class TodayHomePage extends StatefulWidget {
 }
 
 class _TodayHomePageState extends State<TodayHomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

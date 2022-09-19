@@ -13,14 +13,17 @@ const String shorts = "${location}mens-64x64-455160.png";
 const String tankTop = "${location}mens-64x64-455161.png";
 const String sweater = "${location}sweater-64x64-455167.png";
 
+const String waterCountKey = 'currWaterCount';
+
 //BG for app
 // Mudit says: 0C0C0C
 // I say 22252A
 
+//DEV: Theme colors
 const Color backgroundColor = Color(0xFF22252A);
 const Color headerTextColor = Color.fromARGB(255, 213, 213, 222);
 
-//Weather Colors
+//DEV: Weather Colors
 const Color thunderstormColor = Color(0xFFB3BCEF);
 const Color drizzleColor = Color(0xFF90D4DB);
 const Color rainColor = Color(0xFF3AA2EF);
@@ -38,8 +41,11 @@ const Color sunnyColor = Color(0xFFFFCC32);
 
 //Mudit Says: 333333
 //I say: 333741
+//DEV: Card Background Colors
 const Color weatherCardBackgroundColor = Color(0xFF333333);
+const Color reminderCardBackgroundColor = Colors.blue;
 
+//DEV: Text Styles
 const TextStyle degreesNumberTextStyle =
     TextStyle(color: Colors.white, fontSize: 55, fontWeight: FontWeight.bold);
 const TextStyle degreesUnitTextStyle = TextStyle(
@@ -66,6 +72,7 @@ const TextStyle waterReminderSubTitleTextStyle =
 const TextStyle waterReminderCounterTextStyle =
     TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w200);
 
+//DEV: Custom weather object
 class CustomWeatherObjectWithFields {
   Color iconColor;
   IconData weatherIcon;
@@ -94,6 +101,7 @@ class CustomWeatherObjectWithFields {
   }
 }
 
+//DEV: Const function for converting weather info into UI
 // 201	Thunderstorm	thunderstorm with rain	 11d
 CustomWeatherObjectWithFields getWeatherFields(Weather w) {
   int? conditionCode = w.weatherConditionCode;
