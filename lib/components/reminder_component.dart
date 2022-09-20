@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:today_app/components/custom_today_card_widget.dart';
 import 'package:today_app/constants.dart';
+import 'package:flutter/services.dart';
 
 class ReminderComponent extends StatefulWidget {
   ReminderComponent({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class _ReminderComponentState extends State<ReminderComponent> {
 
   void addWaterUnit() {
     // currWaterCount++;
+    HapticFeedback.vibrate();
     if (currWaterCount.value < 8) {
       setState(() {
         currWaterCount.value++;
@@ -61,34 +64,37 @@ class _ReminderComponentState extends State<ReminderComponent> {
         margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
         borderRadius: 25,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                height: 120,
-                width: 200,
+                height: cardHeight,
+                width: cardHeight * 1.37,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: const [
+                      AutoSizeText(
                         'Drink your water!',
                         style: waterReminderTitleTextStyle,
+                        minFontSize: 23,
+                        maxLines: 1,
                       ),
-                      Text(
+                      AutoSizeText(
                         'Your goal is to drink 64oz today',
                         style: waterReminderSubTitleTextStyle,
                         softWrap: true,
                         maxLines: 2,
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.start,
                       ),
                     ],
                   ),
                 ),
               ),
               SimpleCircularProgressBar(
-                size: 90,
+                size: cardHeight / 1.7,
                 maxValue: 8,
                 animationDuration: 3,
                 backColor: Color(0xFF91C5F8), //lighter colored full circle

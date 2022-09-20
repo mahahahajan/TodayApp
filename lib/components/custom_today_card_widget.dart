@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:today_app/constants.dart';
+// import 'package:today_app/constants.dart';
 
 class CustomTodayCard extends StatelessWidget {
-  CustomTodayCard(
+  const CustomTodayCard(
       {required this.cardColor,
       required this.elevation,
       required this.margin,

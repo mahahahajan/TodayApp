@@ -3,7 +3,7 @@ import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
-//Clothes to constants (make my life easy)
+//DEV: Clothes to constants (make my life easy)
 const String location = "images/png-64/";
 const String jacket = "${location}jacket-64x64-455151.png";
 const String hoodie = "${location}hoodie-64x64-455155.png";
@@ -13,6 +13,7 @@ const String shorts = "${location}mens-64x64-455160.png";
 const String tankTop = "${location}mens-64x64-455161.png";
 const String sweater = "${location}sweater-64x64-455167.png";
 
+//DEV: For shared prefs
 const String waterCountKey = 'currWaterCount';
 
 //BG for app
@@ -41,9 +42,13 @@ const Color sunnyColor = Color(0xFFFFCC32);
 
 //Mudit Says: 333333
 //I say: 333741
+//DEV: Card Stuff
 //DEV: Card Background Colors
 const Color weatherCardBackgroundColor = Color(0xFF333333);
 const Color reminderCardBackgroundColor = Colors.blue;
+
+//DEV: Card size numbers
+const double cardHeight = 150;
 
 //DEV: Text Styles
 const TextStyle degreesNumberTextStyle =

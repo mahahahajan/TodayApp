@@ -103,7 +103,7 @@ class _WeatherComponentState extends State<WeatherComponent> {
       child: Center(
         child: myWeather.isNull() // if Null, show  loading indication
             ? Container(
-                height: 133,
+                height: cardHeight,
                 child: SpinKitRing(
                   color: Colors.white,
                 ),
@@ -115,7 +115,7 @@ class _WeatherComponentState extends State<WeatherComponent> {
                 children: <Widget>[
                   Container(
                     // width: 181.5,
-                    height: 133,
+                    height: cardHeight,
                     // margin: EdgeInsets.only(left: 20),
                     margin: EdgeInsets.only(right: 15),
                     padding: EdgeInsets.all(0),
@@ -126,10 +126,13 @@ class _WeatherComponentState extends State<WeatherComponent> {
                         children: [
                           Row(
                             children: [
-                              BoxedIcon(
-                                myWeather.weatherIcon,
-                                size: 70,
-                                color: myWeather.iconColor,
+                              FittedBox(
+                                fit: BoxFit.fill,
+                                child: BoxedIcon(
+                                  myWeather.weatherIcon,
+                                  size: cardHeight / 2.1,
+                                  color: myWeather.iconColor,
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 18.0),
