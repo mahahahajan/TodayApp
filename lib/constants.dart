@@ -3,6 +3,14 @@ import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
+//DEV: Sizing Numbers for the home_screen.dart page
+const double spaceBetweenCards = .04;
+const double headerComponentContainerSize = .1;
+const double weatherComponentContainerSize = .21;
+const double reminderComponentContainerSize = .19;
+const double todoComponentContainerSize = .33;
+// const double headerSize = .08;
+
 //DEV: Clothes to constants (make my life easy)
 const String location = "images/png-64/";
 const String jacket = "${location}jacket-64x64-455151.png";

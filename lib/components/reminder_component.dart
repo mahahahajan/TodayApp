@@ -7,23 +7,33 @@ import 'package:today_app/constants.dart';
 import 'package:flutter/services.dart';
 
 class ReminderComponent extends StatefulWidget {
-  ReminderComponent({Key? key}) : super(key: key);
+  final bool newDay;
+  ReminderComponent({Key? key, required this.newDay}) : super(key: key);
 
   @override
-  State<ReminderComponent> createState() => _ReminderComponentState();
+  State<ReminderComponent> createState() =>
+      _ReminderComponentState(newDay: newDay);
 }
 
 class _ReminderComponentState extends State<ReminderComponent> {
   late final prefs;
+  bool newDay;
+  _ReminderComponentState({required this.newDay});
+
   ValueNotifier<double> currWaterCount = ValueNotifier(0.0);
   @override
   void initState() {
     super.initState();
     loadPrefs();
+    print("Reminder component got newDay: ${widget.newDay}");
   }
 
   void loadPrefs() async {
     prefs = await SharedPreferences.getInstance();
+    var newDayVal = newDay;
+    if (newDayVal) {
+      prefs.setDouble(waterCountKey, 0.0);
+    }
     setState(() {
       currWaterCount.value = (prefs.getDouble(waterCountKey) ?? 0.0);
     });

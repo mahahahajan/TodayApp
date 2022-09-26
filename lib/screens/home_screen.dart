@@ -1,11 +1,11 @@
-// import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:today_app/components/header_component.dart';
 import 'package:today_app/components/weather_component.dart';
 import 'package:today_app/components/reminder_component.dart';
 import 'package:today_app/components/todo_list_component.dart';
+import 'package:today_app/constants.dart';
 
 class TodayHomePage extends StatefulWidget {
   const TodayHomePage({Key? key, required this.title}) : super(key: key);
@@ -25,21 +25,92 @@ class TodayHomePage extends StatefulWidget {
   State<TodayHomePage> createState() => _TodayHomePageState();
 }
 
-class _TodayHomePageState extends State<TodayHomePage> {
+class _TodayHomePageState extends State<TodayHomePage>
+    with WidgetsBindingObserver {
+  late SharedPreferences prefs;
+  late bool newDay;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // checkForFirstTimeBeingRunToday();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.detached) return;
+
+    final isBackground = state == AppLifecycleState.paused;
+
+    if (isBackground) {
+      prefs.setString('lastTimeOpened', DateTime.now().toString());
+      print("Setting lastTimeOpened to ");
+      print(prefs.getString('lastTimeOpened'));
+    }
+  }
+
+  Future<bool> checkForFirstTimeBeingRunToday() async {
+    prefs = await SharedPreferences.getInstance();
+    var lastTimeOpened = prefs.getString('lastTimeOpened');
+    print(lastTimeOpened);
+    if (lastTimeOpened == null) {
+      return true; // its a New day bc I've never opened this app before, so has to be first time for today
+    } else {
+      DateTime lastTimeOpenedObj = DateTime.parse(lastTimeOpened);
+      if (lastTimeOpenedObj.hour > 5 && lastTimeOpenedObj.hour < 8) {
+        //It's a new day because I opened this after midnight last time if i did, so I probably slept since
+        // itsANewDay();
+        return true;
+      } else {
+        //hour >= 8
+        //Check if theres a greater than 1 difference between last timeOpened
+        var now = DateTime.now();
+        if (now.year == lastTimeOpenedObj.year) {
+          print("same year");
+          if (now.month == lastTimeOpenedObj.month) {
+            print("same month");
+            //little overkill but for the sake of being thorough
+            if (now.day - lastTimeOpenedObj.day >= 1) {
+              // if (now.minute - lastTimeOpenedObj.minute >= 1) {
+              //   print("IT is a new day");
+              //   return true;
+              // }
+              //the day has changed since last time
+              // itsANewDay();
+              return true;
+            }
+          }
+        }
+      }
+    }
+    // setState(() {
+    //   newDay = false;
+    //   print(false);
+    // });
+    return false;
+  }
+
+  void itsANewDay() {
+    setState(() {
+      newDay = true;
+      print(true);
+    });
+    return;
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    var deviceSize = MediaQuery.of(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -48,13 +119,47 @@ class _TodayHomePageState extends State<TodayHomePage> {
           // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
 
           // to see the wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            HeaderComponent(),
-            WeatherComponent(),
-            ReminderComponent(),
-            TodoListComponent(),
+            Container(
+              // color: Colors.white,
+              height: deviceSize.size.height * headerComponentContainerSize,
+              child: HeaderComponent(),
+            ),
+            SizedBox(
+              height: deviceSize.size.height * spaceBetweenCards,
+            ),
+            Container(
+              // color: Colors.red,
+              height: deviceSize.size.height * weatherComponentContainerSize,
+              child: WeatherComponent(),
+            ),
+            SizedBox(
+              height: deviceSize.size.height * spaceBetweenCards,
+            ),
+            SizedBox(
+              height: deviceSize.size.height * reminderComponentContainerSize,
+              child: FutureBuilder<bool>(
+                future: checkForFirstTimeBeingRunToday(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData && snapshot.data == true) {
+                      return ReminderComponent(newDay: true);
+                    }
+                  }
+                  return ReminderComponent(newDay: false);
+                },
+              ),
+            ),
+            SizedBox(
+              height: deviceSize.size.height * spaceBetweenCards,
+            ),
+            Container(
+              // color: Colors.green,
+              height: deviceSize.size.height * todoComponentContainerSize,
+              child: TodoListComponent(),
+            ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

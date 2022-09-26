@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 
 class HeaderComponent extends StatelessWidget {
@@ -5,6 +6,7 @@ class HeaderComponent extends StatelessWidget {
 
   HeaderComponent({Key? key}) : super(key: key);
 
+  //TODO: Give this a real time
   String getTimeOfDay(int time) {
     if (3 < time && time < 12) {
       return 'Morning';
@@ -19,7 +21,8 @@ class HeaderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    currTime = getTimeOfDay(17);
+    var now = DateTime.now();
+    currTime = getTimeOfDay(now.hour);
     print(currTime);
     return Row(children: <Widget>[
       Expanded(
@@ -27,18 +30,45 @@ class HeaderComponent extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20.0, 0, 0, 0),
         child: Text(
           'Good $currTime Pulkit',
-          textScaleFactor: 2,
           style: TextStyle(fontWeight: FontWeight.w400),
         ),
       )),
       Padding(
         padding: EdgeInsets.fromLTRB(0, 0, 20.0, 0),
-        child: CircleAvatar(
-          backgroundImage: NetworkImage(
-              "https://avatars.githubusercontent.com/u/9956077?v=4"),
-          radius: 25.0,
-        ),
+        child: AvatarImageComponent(),
       )
     ]);
+  }
+}
+
+class AvatarImageComponent extends StatelessWidget {
+  const AvatarImageComponent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (() => print("Settings")),
+      child: AvatarGlow(
+          glowColor: Colors.white,
+          endRadius: 48,
+          duration: Duration(milliseconds: 5500),
+          showTwoGlows: false,
+          repeat: true,
+          animate: true,
+          curve: Curves.easeInOutSine,
+          repeatPauseDuration: Duration(seconds: 5),
+          child: Material(
+            elevation: 8,
+            shape: CircleBorder(),
+            child: CircleAvatar(
+              backgroundColor: Colors.grey[100],
+              backgroundImage:
+                  AssetImage('images/DefaultImages/defaultAvatar.png'),
+              radius: 30.0,
+            ),
+          )),
+    );
   }
 }
