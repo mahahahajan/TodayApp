@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:today_app/components/header_component.dart';
 import 'package:today_app/components/weather_component.dart';
 import 'package:today_app/components/reminder_component.dart';
@@ -62,50 +61,44 @@ class _TodayHomePageState extends State<TodayHomePage>
   Future<bool> checkForFirstTimeBeingRunToday() async {
     prefs = await SharedPreferences.getInstance();
     var lastTimeOpened = prefs.getString('lastTimeOpened');
-    print(lastTimeOpened);
+    print("Last time opened: $lastTimeOpened");
     if (lastTimeOpened == null) {
       return true; // its a New day bc I've never opened this app before, so has to be first time for today
     } else {
       DateTime lastTimeOpenedObj = DateTime.parse(lastTimeOpened);
-      if (lastTimeOpenedObj.hour > 5 && lastTimeOpenedObj.hour < 8) {
-        //It's a new day because I opened this after midnight last time if i did, so I probably slept since
-        // itsANewDay();
+      DateTime now = DateTime.now();
+
+      if (now.year != lastTimeOpenedObj.year) {
+        //it's a different year so def first time run today
         return true;
       } else {
-        //hour >= 8
-        //Check if theres a greater than 1 difference between last timeOpened
-        var now = DateTime.now();
-        if (now.year == lastTimeOpenedObj.year) {
-          print("same year");
-          if (now.month == lastTimeOpenedObj.month) {
-            print("same month");
-            //little overkill but for the sake of being thorough
-            if (now.day - lastTimeOpenedObj.day >= 1) {
-              // if (now.minute - lastTimeOpenedObj.minute >= 1) {
-              //   print("IT is a new day");
-              //   return true;
-              // }
-              //the day has changed since last time
-              // itsANewDay();
+        if (now.month != lastTimeOpenedObj.month) {
+          //Same year, different month
+          return true;
+        } else {
+          //its the same year and same month
+          //Probably within the same day
+          //start by checking for difference of around 4 hours
+          if (now.hour - lastTimeOpenedObj.hour >= 4) {
+            //Differencce of 4 hours
+            //Case: I close the app at 11:45 and open it at 12:15
+            if (now.day != lastTimeOpenedObj.day) {
+              //more than 4 hour difference and its different days then im probably asleep
+              return true;
+            }
+            if (lastTimeOpenedObj.hour <= 3 && now.hour < 12) {
+              //Same day, more than 4 hour difference, last time was before 3 and now is before noon so i just woke up
               return true;
             }
           }
         }
       }
+      // setState(() {
+      //   newDay = false;
+      //   print(false);
+      // });
+      return false;
     }
-    // setState(() {
-    //   newDay = false;
-    //   print(false);
-    // });
-    return false;
-  }
-
-  void itsANewDay() {
-    setState(() {
-      newDay = true;
-      print(true);
-    });
-    return;
   }
 
   @override
@@ -125,7 +118,7 @@ class _TodayHomePageState extends State<TodayHomePage>
             Container(
               // color: Colors.white,
               height: deviceSize.size.height * headerComponentContainerSize,
-              child: HeaderComponent(),
+              child: const HeaderComponent(),
             ),
             SizedBox(
               height: deviceSize.size.height * spaceBetweenCards,
@@ -133,7 +126,7 @@ class _TodayHomePageState extends State<TodayHomePage>
             Container(
               // color: Colors.red,
               height: deviceSize.size.height * weatherComponentContainerSize,
-              child: WeatherComponent(),
+              child: const WeatherComponent(),
             ),
             SizedBox(
               height: deviceSize.size.height * spaceBetweenCards,
@@ -142,13 +135,15 @@ class _TodayHomePageState extends State<TodayHomePage>
               height: deviceSize.size.height * reminderComponentContainerSize,
               child: FutureBuilder<bool>(
                 future: checkForFirstTimeBeingRunToday(),
+                initialData: false,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData && snapshot.data == true) {
-                      return ReminderComponent(newDay: true);
+                    if (snapshot.hasData) {
+                      print("Snapshot data ${snapshot.data}");
+                      return ReminderComponent(newDay: snapshot.data!);
                     }
                   }
-                  return ReminderComponent(newDay: false);
+                  return const Text("Error");
                 },
               ),
             ),
@@ -158,7 +153,17 @@ class _TodayHomePageState extends State<TodayHomePage>
             Container(
               // color: Colors.green,
               height: deviceSize.size.height * todoComponentContainerSize,
-              child: TodoListComponent(),
+              child: FutureBuilder<bool>(
+                future: checkForFirstTimeBeingRunToday(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      return TodoListComponent(newDay: snapshot.data!);
+                    }
+                  }
+                  return const Text("Error");
+                },
+              ),
             ),
           ],
         ),

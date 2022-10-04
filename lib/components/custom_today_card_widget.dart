@@ -3,21 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomTodayCard extends StatelessWidget {
   const CustomTodayCard(
-      {required this.cardColor,
+      {super.key,
+      required this.cardColor,
       required this.elevation,
       required this.margin,
       required this.borderRadius,
       required this.child});
 
-  // {
-  //   this.elevation = elevation;
-  //   this.customMargin = margin;
-  //   this.borderRadius = borderRadius;
-  //   this.cardPlaceholderText = cardPlaceholderText;
-  //   this.child = child;
-  // }
-
-  // const TodayCard({});
   final Color cardColor;
   final double elevation;
   final EdgeInsets margin;
@@ -27,14 +19,14 @@ class CustomTodayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: this.elevation,
-      surfaceTintColor: this.cardColor,
-      color: this.cardColor,
-      margin: this.margin,
+      elevation: elevation,
+      surfaceTintColor: cardColor,
+      color: cardColor,
+      margin: margin,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(this.borderRadius),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
-      child: this.child,
+      child: child,
     );
   }
 }

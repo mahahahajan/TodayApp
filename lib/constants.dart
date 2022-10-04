@@ -4,11 +4,11 @@ import 'package:weather_icons/weather_icons.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 //DEV: Sizing Numbers for the home_screen.dart page
-const double spaceBetweenCards = .04;
+const double spaceBetweenCards = .025;
 const double headerComponentContainerSize = .1;
 const double weatherComponentContainerSize = .21;
 const double reminderComponentContainerSize = .19;
-const double todoComponentContainerSize = .33;
+const double todoComponentContainerSize = .30;
 // const double headerSize = .08;
 
 //DEV: Clothes to constants (make my life easy)
@@ -58,6 +58,9 @@ const Color reminderCardBackgroundColor = Colors.blue;
 //DEV: Card size numbers
 const double cardHeight = 150;
 
+//DEV: Card SizE Margins and Padding
+const EdgeInsets cardEdges = EdgeInsets.fromLTRB(10, 0, 10, 0);
+
 //DEV: Text Styles
 const TextStyle degreesNumberTextStyle =
     TextStyle(color: Colors.white, fontSize: 55, fontWeight: FontWeight.bold);
@@ -105,8 +108,8 @@ class CustomWeatherObjectWithFields {
       this.outfitBottom = "images/png-64/hoodie-64x64-455155.png"});
 
   bool isNull() {
-    if (this.weatherDescription != "U messed up dummy" &&
-        this.weatherIcon != WeatherIcons.alien) {
+    if (weatherDescription != "U messed up dummy" &&
+        weatherIcon != WeatherIcons.alien) {
       return false;
     } else {
       return true;
@@ -139,7 +142,6 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
     case 201:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -154,7 +156,6 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
     case 202:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -169,7 +170,6 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
     case 210:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -184,7 +184,6 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
     case 211:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -199,7 +198,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 212:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -214,7 +213,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 221:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -229,7 +228,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 230:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -244,7 +243,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 231:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -259,7 +258,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 232:
       {
         // currWeatherIcon = WeatherIcons.thunderstorm;
@@ -274,7 +273,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 300:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -289,7 +288,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 301:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -304,7 +303,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 302:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -319,7 +318,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 310:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -334,7 +333,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 311:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -349,7 +348,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: "images/png-64/hoodie-64x64-455155.png",
         );
       }
-      break;
+
     case 312:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -364,7 +363,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 313:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -379,7 +378,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 314:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -394,7 +393,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 321:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -409,7 +408,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 500:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -424,7 +423,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 501:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -439,7 +438,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 502:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -454,7 +453,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 503:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -469,7 +468,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 504:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -484,7 +483,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 511:
       {
         // currWeatherIcon = WeatherIcons.rain_wind;
@@ -499,7 +498,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 520:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -514,7 +513,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 521:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -529,7 +528,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 522:
       {
         // currWeatherIcon = WeatherIcons.rain;
@@ -544,7 +543,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 531:
       {
         // currWeatherIcon = WeatherIcons.showers;
@@ -559,7 +558,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 600:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -574,7 +573,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 601:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -589,7 +588,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 602:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -604,7 +603,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 611:
       {
         // currWeatherIcon = WeatherIcons.sleet;
@@ -619,7 +618,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 612:
       {
         // currWeatherIcon = WeatherIcons.sleet;
@@ -634,7 +633,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 613:
       {
         // currWeatherIcon = WeatherIcons.sleet;
@@ -649,7 +648,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 615:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -664,7 +663,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 616:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -679,7 +678,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 620:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -694,7 +693,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 621:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -709,7 +708,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 622:
       {
         // currWeatherIcon = WeatherIcons.snow;
@@ -724,7 +723,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 701:
       {
         //   currWeatherIcon = WeatherIcons.fog;
@@ -739,7 +738,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 711:
       {
         // currWeatherIcon = WeatherIcons.smoke;
@@ -754,7 +753,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: shorts,
         );
       }
-      break;
+
     case 721:
       {
         // currWeatherIcon = WeatherIcons.smog;
@@ -769,7 +768,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 731:
       {
         // currWeatherIcon = WeatherIcons.dust;
@@ -784,7 +783,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 741:
       {
         //   currWeatherIcon = WeatherIcons.fog;
@@ -799,7 +798,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 751:
       {
         // currWeatherIcon = WeatherIcons.sleet;
@@ -814,7 +813,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 761:
       {
         // currWeatherIcon = WeatherIcons.dust;
@@ -829,7 +828,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 762:
       {
         // currWeatherIcon = WeatherIcons.dust;
@@ -844,7 +843,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 771:
       {
         // currWeatherIcon = WeatherIcons.tsunami;
@@ -859,7 +858,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 781:
       {
         // currWeatherIcon = WeatherIcons.tornado;
@@ -874,7 +873,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 800:
       {
         // currWeatherIcon = WeatherIcons.day_sunny;
@@ -889,7 +888,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 801:
       {
         // currWeatherIcon = WeatherIcons.cloud;
@@ -904,7 +903,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 802:
       {
         // currWeatherIcon = WeatherIcons.cloud;
@@ -919,7 +918,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 803:
       {
         // currWeatherIcon = WeatherIcons.cloudy;
@@ -934,7 +933,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     case 804:
       {
         // currWeatherIcon = WeatherIcons.cloudy;
@@ -949,7 +948,7 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: jeans,
         );
       }
-      break;
+
     default:
       {
         // currWeatherIcon = WeatherIcons.thermometer;
@@ -963,6 +962,5 @@ CustomWeatherObjectWithFields getWeatherFields(Weather w) {
           outfitBottom: "images/png-64/hoodie-64x64-455155.png",
         );
       }
-      break;
   }
 }

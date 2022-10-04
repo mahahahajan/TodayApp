@@ -8,17 +8,15 @@ import 'package:flutter/services.dart';
 
 class ReminderComponent extends StatefulWidget {
   final bool newDay;
-  ReminderComponent({Key? key, required this.newDay}) : super(key: key);
+  const ReminderComponent({Key? key, required this.newDay}) : super(key: key);
 
   @override
-  State<ReminderComponent> createState() =>
-      _ReminderComponentState(newDay: newDay);
+  State<ReminderComponent> createState() => _ReminderComponentState();
 }
 
 class _ReminderComponentState extends State<ReminderComponent> {
-  late final prefs;
-  bool newDay;
-  _ReminderComponentState({required this.newDay});
+  late SharedPreferences prefs;
+  late bool newDay;
 
   ValueNotifier<double> currWaterCount = ValueNotifier(0.0);
   @override
@@ -29,6 +27,7 @@ class _ReminderComponentState extends State<ReminderComponent> {
   }
 
   void loadPrefs() async {
+    newDay = widget.newDay;
     prefs = await SharedPreferences.getInstance();
     var newDayVal = newDay;
     if (newDayVal) {
@@ -46,7 +45,7 @@ class _ReminderComponentState extends State<ReminderComponent> {
     if (currWaterCount.value < 8) {
       setState(() {
         currWaterCount.value++;
-        prefs?.setDouble(waterCountKey, currWaterCount.value);
+        prefs.setDouble(waterCountKey, currWaterCount.value);
       });
     } else {
       resetWaterUnits();
@@ -56,7 +55,7 @@ class _ReminderComponentState extends State<ReminderComponent> {
   void resetWaterUnits() {
     setState(() {
       currWaterCount.value = 0;
-      prefs?.setDouble(waterCountKey, currWaterCount.value);
+      prefs.setDouble(waterCountKey, currWaterCount.value);
     });
   }
 
@@ -68,17 +67,16 @@ class _ReminderComponentState extends State<ReminderComponent> {
         addWaterUnit();
       }),
       child: CustomTodayCard(
-        //TODO: set this card Color to be a constant so it can be edited easier
         cardColor: reminderCardBackgroundColor,
         elevation: 1,
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        margin: cardEdges,
         borderRadius: 25,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+          padding: const EdgeInsets.fromLTRB(3.0, 0, 3.0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
+              SizedBox(
                 height: cardHeight,
                 width: cardHeight * 1.37,
                 child: Center(
@@ -107,11 +105,11 @@ class _ReminderComponentState extends State<ReminderComponent> {
                 size: cardHeight / 1.7,
                 maxValue: 8,
                 animationDuration: 3,
-                backColor: Color(0xFF91C5F8), //lighter colored full circle
+                backColor: const Color(0xFF91C5F8), //lighter colored full circle
                 backStrokeWidth: 10,
                 progressStrokeWidth: 12,
                 mergeMode: true,
-                progressColors: [
+                progressColors: const [
                   // Colors.red,
                   // Colors.yellow,
                   // Colors.green,

@@ -19,6 +19,8 @@ class CustomWeatherObj {
 }
 
 class WeatherComponent extends StatefulWidget {
+  const WeatherComponent({Key? key}) : super(key: key);
+
   @override
   State<WeatherComponent> createState() => _WeatherComponentState();
 }
@@ -30,7 +32,7 @@ class _WeatherComponentState extends State<WeatherComponent> {
   double? long;
   int? temp = 90;
 
-  WeatherFactory wf = new WeatherFactory(openWeatherApiKey);
+  WeatherFactory wf = WeatherFactory(openWeatherApiKey);
 
   IconData currWeatherIcon = WeatherIcons.alien;
 
@@ -46,31 +48,31 @@ class _WeatherComponentState extends State<WeatherComponent> {
 
   //#52A5DF
   Future<void> getLocationData() async {
-    Location location = new Location();
+    Location location = Location();
 
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    LocationData locationData;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
         return;
       }
     }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
 
-    _locationData = await location.getLocation();
-    lat = _locationData.latitude;
-    long = _locationData.longitude;
+    locationData = await location.getLocation();
+    lat = locationData.latitude;
+    long = locationData.longitude;
     // print(_locationData);
   }
 
@@ -87,7 +89,6 @@ class _WeatherComponentState extends State<WeatherComponent> {
         myWeather = myWeather;
       });
     } on Exception catch (e) {
-      // TODO
       print(e);
     }
   }
@@ -98,11 +99,11 @@ class _WeatherComponentState extends State<WeatherComponent> {
     return CustomTodayCard(
       cardColor: weatherCardBackgroundColor,
       elevation: 10,
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      margin: cardEdges,
       borderRadius: 25,
       child: Center(
         child: myWeather.isNull() // if Null, show  loading indication
-            ? Container(
+            ? const SizedBox(
                 height: cardHeight,
                 child: SpinKitRing(
                   color: Colors.white,
@@ -117,11 +118,11 @@ class _WeatherComponentState extends State<WeatherComponent> {
                     // width: 181.5,
                     height: cardHeight,
                     // margin: EdgeInsets.only(left: 20),
-                    margin: EdgeInsets.only(right: 15),
-                    padding: EdgeInsets.all(0),
+                    margin: const EdgeInsets.only(right: 15),
+                    padding: const EdgeInsets.all(0),
                     child: Row(children: [
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
@@ -144,7 +145,7 @@ class _WeatherComponentState extends State<WeatherComponent> {
                                         text: myWeather.temperature.toString(),
                                         style: degreesNumberTextStyle,
                                       ),
-                                      TextSpan(
+                                      const TextSpan(
                                         text: "˚f",
                                         style: degreesUnitTextStyle,
                                       ),
@@ -170,8 +171,9 @@ class _WeatherComponentState extends State<WeatherComponent> {
                     ]),
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "OOTD:",
                         style: outfitLabelTextStyle,
                       ),
